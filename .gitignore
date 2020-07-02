@@ -1,0 +1,9 @@
+# Maven
+/target
+
+# IDEA
+.idea
+*.iml
+
+# Java
+hs_err_pid*
