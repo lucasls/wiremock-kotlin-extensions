@@ -4,8 +4,11 @@
 
     <groupId>com.github.lucasls.kotlinx.wiremock</groupId>
     <artifactId>wiremock-kotlin-extensions</artifactId>
-    <name>wiremock-kotlin-extensions</name>
     <version>0.0.3-SNAPSHOT</version>
+
+    <name>wiremock-kotlin-extensions</name>
+    <description>The simplest possible Kotlin DSL for Wiremock</description>
+    <url>https://github.com/lucasls/wiremock-kotlin-extensions</url>
 
     <licenses>
         <license>
