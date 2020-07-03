@@ -136,9 +136,9 @@
                 <version>0.10.1</version>
                 <executions>
                     <execution>
-                        <phase>pre-site</phase>
+                        <phase>deploy</phase>
                         <goals>
-                            <goal>dokka:javadocJar</goal>
+                            <goal>javadocJar</goal>
                         </goals>
                     </execution>
                 </executions>
