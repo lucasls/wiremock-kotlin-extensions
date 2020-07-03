@@ -1,5 +1,4 @@
 @file:Suppress("unused")
-
 package com.lucasls.kotlinx.wiremock
 
 import com.github.tomakehurst.wiremock.client.MappingBuilder
@@ -8,6 +7,7 @@ import com.github.tomakehurst.wiremock.client.ScenarioMappingBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.extension.Parameters
 import com.github.tomakehurst.wiremock.http.Request
+import com.github.tomakehurst.wiremock.matching.MultipartValuePatternBuilder
 import com.github.tomakehurst.wiremock.matching.UrlPattern
 import com.github.tomakehurst.wiremock.matching.ValueMatcher
 
@@ -77,6 +77,11 @@ inline fun MappingBuilder.inScenario(
     scenarioName: String, block: ScenarioMappingBuilder.() -> Unit
 ): ScenarioMappingBuilder =
     this.inScenario(scenarioName).also(block)
+
+inline fun MappingBuilder.withMultipartRequestBody(
+    block: MultipartValuePatternBuilder.() -> Unit
+): MultipartValuePatternBuilder =
+    aMultipart().also(block)
 
 infix fun MappingBuilder.willReturn(responseDefBuilder: ResponseDefinitionBuilder): MappingBuilder =
     this.willReturn(responseDefBuilder)

@@ -1,11 +1,15 @@
+@file:Suppress("unused")
 package com.lucasls.kotlinx.wiremock
 
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.extension.Parameters
 import com.github.tomakehurst.wiremock.http.Request
+import com.github.tomakehurst.wiremock.matching.MultipartValuePatternBuilder
 import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder
 import com.github.tomakehurst.wiremock.matching.UrlPattern
 import com.github.tomakehurst.wiremock.matching.ValueMatcher
+
+// Creators
 
 inline fun getRequestedFor(
     urlPattern: UrlPattern, block: RequestPatternBuilder.() -> Unit = {}
@@ -61,3 +65,15 @@ inline fun requestMadeFor(
     requestMatcher: ValueMatcher<Request>, block: RequestPatternBuilder.() -> Unit = {}
 ): RequestPatternBuilder =
     WireMock.requestMadeFor(requestMatcher).apply(block)
+
+// Extensions
+
+inline fun RequestPatternBuilder.withAnyRequestBodyPart(
+    block: MultipartValuePatternBuilder.() -> Unit
+): RequestPatternBuilder =
+    this.withAnyRequestBodyPart(aMultipart().also(block))
+
+inline fun RequestPatternBuilder.withAllRequestBodyParts(
+    block: MultipartValuePatternBuilder.() -> Unit
+): RequestPatternBuilder =
+    this.withAllRequestBodyParts(aMultipart().also(block))

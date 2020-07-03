@@ -6,6 +6,7 @@ import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMockBuilder
 import com.github.tomakehurst.wiremock.junit.Stubbing
+import com.github.tomakehurst.wiremock.matching.MultipartValuePatternBuilder
 import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder
 import com.github.tomakehurst.wiremock.matching.UrlPathPattern
 import com.github.tomakehurst.wiremock.matching.UrlPattern
@@ -60,6 +61,10 @@ fun exactly(expected: Int): CountMatchingStrategy = WireMock.exactly(expected)
 fun moreThanOrExactly(expected: Int): CountMatchingStrategy = WireMock.moreThanOrExactly(expected)
 
 fun moreThan(expected: Int): CountMatchingStrategy = WireMock.moreThan(expected)
+
+fun aMultipart(): MultipartValuePatternBuilder = WireMock.aMultipart()
+
+fun aMultipart(name: String): MultipartValuePatternBuilder = WireMock.aMultipart(name)
 
 fun verify(requestPatternBuilder: RequestPatternBuilder) =
     WireMock.verify(requestPatternBuilder)
