@@ -133,6 +133,9 @@ internal class MappingBuilderExtensionsKtTest {
         ),
         `dynamicTest - extension should match original with String`(
             "delete", { WireMock.delete(it) }, { u, b -> delete(u, b) }
+        ),
+        `dynamicTest - extension should match original with String`(
+            "requestMatching", { WireMock.requestMatching(it) }, { u, b -> requestMatching(u, b) }
         )
     )
 
@@ -159,6 +162,9 @@ internal class MappingBuilderExtensionsKtTest {
         ),
         `dynamicTest - extension should match original with String with no builder`(
             "delete", { WireMock.delete(it) }, { delete(it) }
+        ),
+        `dynamicTest - extension should match original with String with no builder`(
+            "requestMatching", { WireMock.requestMatching(it) }, { requestMatching(it) }
         )
     )
 
