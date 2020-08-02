@@ -20,27 +20,16 @@ import com.nhaarman.mockitokotlin2.any as mockito_any
 @ExtendWith(MockitoExtension::class)
 internal class MappingBuilderExtensionsKtTest {
 
-    data class OriginalExtension<T>(
-        val name: String,
-        val original: (T) -> MappingBuilder,
-        val extension: (T, MappingBuilder.() -> Unit) -> MappingBuilder
-    )
-
-    data class OriginalExtensionNoBuilder<T>(
-        val name: String,
-        val original: (T) -> MappingBuilder,
-        val extension: (T) -> MappingBuilder
-    )
-
-    fun `extension should match original with UrlPattern`(
-        origFactory: (urlPattern: UrlPattern) -> MappingBuilder,
-        extFactory: (urlPattern: UrlPattern, MappingBuilder.() -> Unit) -> MappingBuilder
-    ) {
-        val orig = origFactory(WireMock.anyUrl())
+    private fun `dynamicTest - extension should match original with UrlPattern`(
+        testName: String,
+        origFunction: (UrlPattern) -> MappingBuilder,
+        extFunction: (UrlPattern, MappingBuilder.() -> Unit) -> MappingBuilder
+    ) = dynamicTest(testName) {
+        val orig = origFunction(WireMock.anyUrl())
             .withQueryParam("q", WireMock.equalTo("test"))
             .withHeader("h", WireMock.equalTo("test"))
 
-        val ext = extFactory(WireMock.anyUrl()) {
+        val ext = extFunction(WireMock.anyUrl()) {
             withQueryParam("q", WireMock.equalTo("test"))
             withHeader("h", WireMock.equalTo("test"))
         }
@@ -50,42 +39,81 @@ internal class MappingBuilderExtensionsKtTest {
 
     @TestFactory
     fun `extension should match original with UrlPattern`() = listOf(
-        dynamicTest("get(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::get, ::get)
-        },
-        dynamicTest("post(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::post, ::post)
-        },
-        dynamicTest("put(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::put, ::put)
-        },
-        dynamicTest("delete(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::delete, ::delete)
-        },
-        dynamicTest("patch(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::patch, ::patch)
-        },
-        dynamicTest("head(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::head, ::head)
-        },
-        dynamicTest("options(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::options, ::options)
-        },
-        dynamicTest("trace(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::trace, ::trace)
-        },
-        dynamicTest("any(UrlPattern)") {
-            `extension should match original with UrlPattern`(WireMock::any, ::any)
-        }
+        `dynamicTest - extension should match original with UrlPattern`(
+            "get", { WireMock.get(it) }, { p, b -> get(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "post", { WireMock.post(it) }, { p, b -> post(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "put", { WireMock.put(it) }, { p, b -> put(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "delete", { WireMock.delete(it) }, { p, b -> delete(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "patch", { WireMock.patch(it) }, { p, b -> patch(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "head", { WireMock.head(it) }, { p, b -> head(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "options", { WireMock.options(it) }, { p, b -> options(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "trace", { WireMock.trace(it) }, { p, b -> trace(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "any", { WireMock.any(it) }, { p, b -> any(p, b) }),
+        `dynamicTest - extension should match original with UrlPattern`(
+            "request", { WireMock.request("GET", it) }, { p, b -> request("GET", p, b) }
+        )
     )
 
-    @Test
-    fun `request extension should match original with UrlPattern`() {
-        val orig = WireMock.request("GET", WireMock.anyUrl())
+    private fun `dynamicTest - extension should match original with UrlPattern with no builder`(
+        testName: String, origFunction: (UrlPattern) -> MappingBuilder, extFunction: (UrlPattern) -> MappingBuilder
+    ) = dynamicTest(testName) {
+        val orig = origFunction(WireMock.anyUrl())
+        val ext = extFunction(WireMock.anyUrl())
+        assertThat(ext) hasSameFieldsOf orig
+    }
+
+    @TestFactory
+    fun `extension should match original with UrlPattern with no builder`() = listOf(
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "get", { WireMock.get(it) }, { get(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "post", { WireMock.post(it) }, { post(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "put", { WireMock.put(it) }, { put(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "delete", { WireMock.delete(it) }, { delete(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "patch", { WireMock.patch(it) }, { patch(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "head", { WireMock.head(it) }, { head(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "options", { WireMock.options(it) }, { options(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "trace", { WireMock.trace(it) }, { trace(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "any", { WireMock.any(it) }, { any(it) }
+        ),
+        `dynamicTest - extension should match original with UrlPattern with no builder`(
+            "request", { WireMock.request("GET", it) }, { request("GET", it) }
+        )
+    )
+
+    private fun `dynamicTest - extension should match original with String`(
+        testName: String,
+        origFunction: (String) -> MappingBuilder,
+        extFunction: (String, MappingBuilder.() -> Unit) -> MappingBuilder
+    ) = dynamicTest(testName) {
+        val orig = origFunction("/test")
             .withQueryParam("q", WireMock.equalTo("test"))
             .withHeader("h", WireMock.equalTo("test"))
 
-        val ext = request("GET", WireMock.anyUrl()) {
+        val ext = extFunction("/test") {
             withQueryParam("q", WireMock.equalTo("test"))
             withHeader("h", WireMock.equalTo("test"))
         }
@@ -94,60 +122,45 @@ internal class MappingBuilderExtensionsKtTest {
     }
 
     @TestFactory
-    fun `extension should match original with UrlPattern with no builder`() =
-        listOf<OriginalExtensionNoBuilder<UrlPattern>>(
-            OriginalExtensionNoBuilder("get", WireMock::get, { get(it) }),
-            OriginalExtensionNoBuilder("post", WireMock::post, { post(it) }),
-            OriginalExtensionNoBuilder("put", WireMock::put, { put(it) }),
-            OriginalExtensionNoBuilder("delete", WireMock::delete, { delete(it) }),
-            OriginalExtensionNoBuilder("patch", WireMock::patch, { patch(it) }),
-            OriginalExtensionNoBuilder("head", WireMock::head, { head(it) }),
-            OriginalExtensionNoBuilder("options", WireMock::options, { options(it) }),
-            OriginalExtensionNoBuilder("trace", WireMock::trace, { trace(it) }),
-            OriginalExtensionNoBuilder("any", WireMock::any, { any(it) }),
-            OriginalExtensionNoBuilder("request", { WireMock.request("GET", it) }, { request("GET", it) })
-        ).map { (name, original, extension) ->
-            dynamicTest("$name(UrlPattern)") {
-                val orig = original(WireMock.anyUrl())
-                val ext = extension(WireMock.anyUrl())
-                assertThat(ext) hasSameFieldsOf orig
-            }
-        }
+    fun `extension should match original with String`() = listOf(
+        `dynamicTest - extension should match original with String`(
+            "get", { WireMock.get(it) }, { u, b -> get(u, b) }),
+        `dynamicTest - extension should match original with String`(
+            "post", { WireMock.post(it) }, { u, b -> post(u, b) }
+        ),
+        `dynamicTest - extension should match original with String`(
+            "put", { WireMock.put(it) }, { u, b -> put(u, b) }
+        ),
+        `dynamicTest - extension should match original with String`(
+            "delete", { WireMock.delete(it) }, { u, b -> delete(u, b) }
+        )
+    )
 
-    @TestFactory
-    fun `extension should match original with String`() = listOf<OriginalExtension<String>>(
-        OriginalExtension("get", WireMock::get, ::get),
-        OriginalExtension("post", WireMock::post, ::post),
-        OriginalExtension("put", WireMock::put, ::put),
-        OriginalExtension("delete", WireMock::delete, ::delete)
-    ).map { (name, original, extension) ->
-        dynamicTest("$name(String)") {
-            val orig = original("/test")
-                .withQueryParam("q", WireMock.equalTo("test"))
-                .withHeader("h", WireMock.equalTo("test"))
-
-            val ext = extension("/test") {
-                withQueryParam("q", WireMock.equalTo("test"))
-                withHeader("h", WireMock.equalTo("test"))
-            }
-
-            assertThat(ext) hasSameFieldsOf orig
-        }
+    private fun `dynamicTest - extension should match original with String with no builder`(
+        testName: String,
+        origFunction: (String) -> MappingBuilder,
+        extFunction: (String) -> MappingBuilder
+    ) = dynamicTest(testName) {
+        val orig = origFunction("/test")
+        val ext = extFunction("/test")
+        assertThat(ext) hasSameFieldsOf orig
     }
 
     @TestFactory
-    fun `extension should match original with String with no builder`() = listOf<OriginalExtensionNoBuilder<String>>(
-        OriginalExtensionNoBuilder("get", WireMock::get, { get(it) }),
-        OriginalExtensionNoBuilder("post", WireMock::post, { post(it) }),
-        OriginalExtensionNoBuilder("put", WireMock::put, { put(it) }),
-        OriginalExtensionNoBuilder("delete", WireMock::delete, { delete(it) })
-    ).map { (name, original, extension) ->
-        dynamicTest("$name(String)") {
-            val orig = original("/test")
-            val ext = extension("/test")
-            assertThat(ext) hasSameFieldsOf orig
-        }
-    }
+    fun `extension should match original with String with no builder`() = listOf(
+        `dynamicTest - extension should match original with String with no builder`(
+            "get", { WireMock.get(it) }, { get(it) }
+        ),
+        `dynamicTest - extension should match original with String with no builder`(
+            "post", { WireMock.post(it) }, { post(it) }
+        ),
+        `dynamicTest - extension should match original with String with no builder`(
+            "put", { WireMock.put(it) }, { put(it) }
+        ),
+        `dynamicTest - extension should match original with String with no builder`(
+            "delete", { WireMock.delete(it) }, { delete(it) }
+        )
+    )
 
     @Test
     fun `inScenario should call original and apply block`() {
@@ -194,6 +207,5 @@ internal class MappingBuilderExtensionsKtTest {
             .withName(name)
 
         assertThat(ext) hasSameFieldsOf orig
-
     }
 }
