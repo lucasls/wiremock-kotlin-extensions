@@ -1,4 +1,3 @@
-@file:Suppress("unused")
 package com.lucasls.kotlinx.wiremock
 
 import com.github.tomakehurst.wiremock.client.CountMatchingStrategy

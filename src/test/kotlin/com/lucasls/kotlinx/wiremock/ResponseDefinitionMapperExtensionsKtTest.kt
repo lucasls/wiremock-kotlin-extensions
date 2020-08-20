@@ -9,7 +9,10 @@ import helpers.hasSameFieldsOf
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.junit.jupiter.MockitoExtension
 
+@ExtendWith(MockitoExtension::class)
 internal class ResponseDefinitionMapperExtensionsKtTest {
     @TestFactory
     fun `extension with block should match original`(): List<DynamicTest> {

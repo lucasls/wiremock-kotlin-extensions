@@ -167,7 +167,7 @@ internal class MappingBuilderExtensionsKtTest {
     }
 
     @Test
-    fun `willReturn should call original and apply block`() {
+    fun `willReturnAResponse should call original and apply block`() {
         // GIVEN
         val body = "body"
 
