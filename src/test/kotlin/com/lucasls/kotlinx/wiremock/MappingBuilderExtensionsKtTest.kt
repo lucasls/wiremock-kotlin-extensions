@@ -38,34 +38,29 @@ internal class MappingBuilderExtensionsKtTest {
         }
 
         return listOf<Triple<String, () -> MappingBuilder, () -> MappingBuilder>>(
-            Triple("get UrlPattern", { WireMock.get(urlPattern) }, { get(urlPattern, block) }),
-            Triple("post UrlPattern", { WireMock.post(urlPattern) }, { post(urlPattern, block) }),
-            Triple("put UrlPattern", { WireMock.put(urlPattern) }, { put(urlPattern, block) }),
-            Triple("delete UrlPattern", { WireMock.delete(urlPattern) }, { delete(urlPattern, block) }),
-            Triple("patch UrlPattern", { WireMock.patch(urlPattern) }, { patch(urlPattern, block) }),
-            Triple("head UrlPattern", { WireMock.head(urlPattern) }, { head(urlPattern, block) }),
-            Triple("options UrlPattern", { WireMock.options(urlPattern) }, { options(urlPattern, block) }),
-            Triple("trace UrlPattern", { WireMock.trace(urlPattern) }, { trace(urlPattern, block) }),
-            Triple("any UrlPattern", { WireMock.any(urlPattern) }, { any(urlPattern, block) }),
+            Triple("get", { WireMock.get(urlPattern) }, { get(urlPattern, block) }),
+            Triple("post", { WireMock.post(urlPattern) }, { post(urlPattern, block) }),
+            Triple("put", { WireMock.put(urlPattern) }, { put(urlPattern, block) }),
+            Triple("delete", { WireMock.delete(urlPattern) }, { delete(urlPattern, block) }),
+            Triple("patch", { WireMock.patch(urlPattern) }, { patch(urlPattern, block) }),
+            Triple("head", { WireMock.head(urlPattern) }, { head(urlPattern, block) }),
+            Triple("options", { WireMock.options(urlPattern) }, { options(urlPattern, block) }),
+            Triple("trace", { WireMock.trace(urlPattern) }, { trace(urlPattern, block) }),
+            Triple("any", { WireMock.any(urlPattern) }, { any(urlPattern, block) }),
 
-            Triple("get String", { WireMock.get(url) }, { get(url, block) }),
-            Triple("post String", { WireMock.post(url) }, { post(url, block) }),
-            Triple("put String", { WireMock.put(url) }, { put(url, block) }),
-            Triple("delete String", { WireMock.delete(url) }, { delete(url, block) }),
-            Triple("proxyAllTo String", { WireMock.proxyAllTo(url) }, { proxyAllTo(url, block) }),
+            Triple("get", { WireMock.get(url) }, { get(url, block) }),
+            Triple("post", { WireMock.post(url) }, { post(url, block) }),
+            Triple("put", { WireMock.put(url) }, { put(url, block) }),
+            Triple("delete", { WireMock.delete(url) }, { delete(url, block) }),
+            Triple("proxyAllTo", { WireMock.proxyAllTo(url) }, { proxyAllTo(url, block) }),
 
-            Triple(
-                "request UrlPattern", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern, block) }),
-            Triple(
-                "requestMatching String",
-                { WireMock.requestMatching(reqMatcher) }, { requestMatching(reqMatcher, block) }),
-            Triple(
-                "requestMatching String Parameters",
-                { WireMock.requestMatching(reqMatcher, parameters) },
+            Triple("request", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern, block) }),
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcher) },
+                { requestMatching(reqMatcher, block) }),
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
                 { requestMatching(reqMatcher, parameters, block) }),
-            Triple(
-                "requestMatching ValueMatcher",
-                { WireMock.requestMatching(reqMatcherExt) }, { requestMatching(reqMatcherExt, block) })
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcherExt) },
+                { requestMatching(reqMatcherExt, block) })
 
         ).map { (name, originalFactory, extensionFactory) ->
             dynamicTest(name) {
@@ -89,34 +84,28 @@ internal class MappingBuilderExtensionsKtTest {
         val reqMatcherExt = RequestMatcherExtension.ALWAYS
 
         return listOf<Triple<String, () -> MappingBuilder, () -> MappingBuilder>>(
-            Triple("get UrlPattern", { WireMock.get(urlPattern) }, { get(urlPattern) }),
-            Triple("post UrlPattern", { WireMock.post(urlPattern) }, { post(urlPattern) }),
-            Triple("put UrlPattern", { WireMock.put(urlPattern) }, { put(urlPattern) }),
-            Triple("delete UrlPattern", { WireMock.delete(urlPattern) }, { delete(urlPattern) }),
-            Triple("patch UrlPattern", { WireMock.patch(urlPattern) }, { patch(urlPattern) }),
-            Triple("head UrlPattern", { WireMock.head(urlPattern) }, { head(urlPattern) }),
-            Triple("options UrlPattern", { WireMock.options(urlPattern) }, { options(urlPattern) }),
-            Triple("trace UrlPattern", { WireMock.trace(urlPattern) }, { trace(urlPattern) }),
-            Triple("any UrlPattern", { WireMock.any(urlPattern) }, { any(urlPattern) }),
-            Triple("get String", { WireMock.get(url) }, { get(url) }),
+            Triple("get", { WireMock.get(urlPattern) }, { get(urlPattern) }),
+            Triple("post", { WireMock.post(urlPattern) }, { post(urlPattern) }),
+            Triple("put", { WireMock.put(urlPattern) }, { put(urlPattern) }),
+            Triple("delete", { WireMock.delete(urlPattern) }, { delete(urlPattern) }),
+            Triple("patch", { WireMock.patch(urlPattern) }, { patch(urlPattern) }),
+            Triple("head", { WireMock.head(urlPattern) }, { head(urlPattern) }),
+            Triple("options", { WireMock.options(urlPattern) }, { options(urlPattern) }),
+            Triple("trace", { WireMock.trace(urlPattern) }, { trace(urlPattern) }),
+            Triple("any", { WireMock.any(urlPattern) }, { any(urlPattern) }),
+            Triple("get", { WireMock.get(url) }, { get(url) }),
 
-            Triple("post String", { WireMock.post(url) }, { post(url) }),
-            Triple("put String", { WireMock.put(url) }, { put(url) }),
-            Triple("delete String", { WireMock.delete(url) }, { delete(url) }),
-            Triple("proxyAllTo String", { WireMock.proxyAllTo(url) }, { proxyAllTo(url) }),
+            Triple("post", { WireMock.post(url) }, { post(url) }),
+            Triple("put", { WireMock.put(url) }, { put(url) }),
+            Triple("delete", { WireMock.delete(url) }, { delete(url) }),
+            Triple("proxyAllTo", { WireMock.proxyAllTo(url) }, { proxyAllTo(url) }),
 
-            Triple("request UrlPattern", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern) }),
+            Triple("request", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern) }),
 
-            Triple(
-                "requestMatching String",
-                { WireMock.requestMatching(reqMatcher) }, { requestMatching(reqMatcher) }),
-            Triple(
-                "requestMatching String Parameters",
-                { WireMock.requestMatching(reqMatcher, parameters) },
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcher) }, { requestMatching(reqMatcher) }),
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
                 { requestMatching(reqMatcher, parameters) }),
-            Triple(
-                "requestMatching ValueMatcher",
-                { WireMock.requestMatching(reqMatcherExt) }, { requestMatching(reqMatcherExt) })
+            Triple("requestMatching", { WireMock.requestMatching(reqMatcherExt) }, { requestMatching(reqMatcherExt) })
 
         ).map { (name, originalFactory, extensionFactory) ->
             dynamicTest(name) {
