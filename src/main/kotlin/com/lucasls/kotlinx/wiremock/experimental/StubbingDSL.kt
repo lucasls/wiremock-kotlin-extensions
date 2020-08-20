@@ -1,17 +1,16 @@
-@file:Suppress("unused")
-package com.lucasls.kotlinx.wiremock
+package com.lucasls.kotlinx.wiremock.experimental
 
 import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
 import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
+import com.lucasls.kotlinx.wiremock.aResponse
+import com.lucasls.kotlinx.wiremock.givenThat
+import com.lucasls.kotlinx.wiremock.stubFor
 
 
 class StubbingScope(private val stubFunction: (MappingBuilder) -> StubMapping) {
-    infix fun MappingBuilder.willReturn(responseDefBuilder: ResponseDefinitionBuilder): MappingBuilder =
-        this.willReturn(responseDefBuilder).also { stubFunction(it) }
-
-    infix fun MappingBuilder.willReturn(block: ResponseDefinitionBuilder.() -> Unit): MappingBuilder =
+    infix fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit): MappingBuilder =
         this.willReturn(aResponse(block)).also { stubFunction.invoke(it) }
 }
 
