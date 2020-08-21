@@ -1,10 +1,10 @@
-package com.lucasls.kotlinx.wiremock.experimental
+package com.github.lucasls.kotlinx.wiremock.experimental
 
 import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
-import com.lucasls.kotlinx.wiremock.experimental.StubbingScope
+import com.github.lucasls.kotlinx.wiremock.experimental.StubbingScope
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock

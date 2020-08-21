@@ -1,10 +1,7 @@
-package com.lucasls.kotlinx.wiremock
+package com.github.lucasls.kotlinx.wiremock
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
-import com.github.tomakehurst.wiremock.extension.Parameters
-import com.github.tomakehurst.wiremock.matching.RequestMatcherExtension
-import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder
 import helpers.hasSameFieldsOf
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DynamicTest
@@ -50,7 +47,12 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("notFound", { WireMock.notFound() }, { notFound(block) }),
             Triple("serverError", { WireMock.serverError() }, { serverError(block) }),
             Triple("serviceUnavailable", { WireMock.serviceUnavailable() }, { serviceUnavailable(block) }),
-            Triple("status", { WireMock.status(status) }, { status(status, block) })
+            Triple("status", { WireMock.status(status) }, {
+                status(
+                    status,
+                    block
+                )
+            })
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {
@@ -95,7 +97,11 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("notFound", { WireMock.notFound() }, { notFound() }),
             Triple("serverError", { WireMock.serverError() }, { serverError() }),
             Triple("serviceUnavailable", { WireMock.serviceUnavailable() }, { serviceUnavailable() }),
-            Triple("status", { WireMock.status(status) }, { status(status) })
+            Triple("status", { WireMock.status(status) }, {
+                status(
+                    status
+                )
+            })
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {

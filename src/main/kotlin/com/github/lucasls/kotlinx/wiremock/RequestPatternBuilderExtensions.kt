@@ -1,4 +1,4 @@
-package com.lucasls.kotlinx.wiremock
+package com.github.lucasls.kotlinx.wiremock
 
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.extension.Parameters

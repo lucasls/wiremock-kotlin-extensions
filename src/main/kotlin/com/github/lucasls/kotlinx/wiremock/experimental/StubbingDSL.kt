@@ -1,12 +1,12 @@
-package com.lucasls.kotlinx.wiremock.experimental
+package com.github.lucasls.kotlinx.wiremock.experimental
 
 import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
 import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
-import com.lucasls.kotlinx.wiremock.aResponse
-import com.lucasls.kotlinx.wiremock.givenThat
-import com.lucasls.kotlinx.wiremock.stubFor
+import com.github.lucasls.kotlinx.wiremock.aResponse
+import com.github.lucasls.kotlinx.wiremock.givenThat
+import com.github.lucasls.kotlinx.wiremock.stubFor
 
 
 class StubbingScope(private val stubFunction: (MappingBuilder) -> StubMapping) {
