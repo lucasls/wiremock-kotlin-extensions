@@ -12,7 +12,7 @@ import com.github.tomakehurst.wiremock.matching.UrlPattern
 import com.github.tomakehurst.wiremock.recording.RecordSpecBuilder
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 
-inline fun createWireMock(block: WireMockBuilder.() -> Unit = {}): WireMock =
+fun createWireMock(block: WireMockBuilder.() -> Unit = {}): WireMock =
     WireMock.create()
         .also(block)
         .build()
@@ -83,5 +83,5 @@ fun Stubbing.verify(vararg requestPatternBuilders: RequestPatternBuilder) = requ
     verify(it)
 }
 
-inline fun recordSpec(block: RecordSpecBuilder.() -> Unit): RecordSpecBuilder =
+fun recordSpec(block: RecordSpecBuilder.() -> Unit): RecordSpecBuilder =
     WireMock.recordSpec().apply(block)

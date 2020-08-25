@@ -6,26 +6,37 @@ import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 import com.github.lucasls.kotlinx.wiremock.aResponse
 import com.github.lucasls.kotlinx.wiremock.givenThat
+import com.github.lucasls.kotlinx.wiremock.request
 import com.github.lucasls.kotlinx.wiremock.stubFor
+import com.github.lucasls.kotlinx.wiremock.urlEqualTo
+import com.github.tomakehurst.wiremock.matching.UrlPattern
 
 
 class StubbingScope(private val stubFunction: (MappingBuilder) -> StubMapping) {
-    infix fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit): MappingBuilder =
-        this.willReturn(aResponse(block)).also { stubFunction.invoke(it) }
+
+    inner class MappingBuilderScope(private val mappingBuilder: MappingBuilder) {
+        operator fun invoke(block: MappingBuilder.() -> Unit) {
+            mappingBuilder.apply(block).also { stubFunction(it) }
+        }
+    }
+
+    infix fun String.to(url: String) = MappingBuilderScope(request(this, urlEqualTo(url)))
+    infix fun String.to(urlPattern: UrlPattern) = MappingBuilderScope(request(this, urlPattern))
+
 }
 
-inline fun givenThat(block: StubbingScope.() -> Unit) {
+fun givenThat(block: StubbingScope.() -> Unit) {
     StubbingScope(::givenThat).block()
 }
 
-inline fun stubFor(block: StubbingScope.() -> Unit) {
+fun stubFor(block: StubbingScope.() -> Unit) {
     StubbingScope(::stubFor).block()
 }
 
-inline fun Stubbing.givenThat(block: StubbingScope.() -> Unit) {
+fun Stubbing.givenThat(block: StubbingScope.() -> Unit) {
     StubbingScope(this::givenThat).block()
 }
 
-inline fun Stubbing.stubFor(block: StubbingScope.() -> Unit) {
+fun Stubbing.stubFor(block: StubbingScope.() -> Unit) {
     StubbingScope(this::stubFor).block()
 }
