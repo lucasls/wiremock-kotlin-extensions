@@ -1,5 +1,9 @@
-package com.github.lucasls.kotlinx.wiremock
+package com.github.lucasls.kotlinx.wiremock.experimental
 
+import com.github.lucasls.kotlinx.wiremock.configureFor
+import com.github.lucasls.kotlinx.wiremock.containing
+import com.github.lucasls.kotlinx.wiremock.inScenario
+import com.github.lucasls.kotlinx.wiremock.willReturnAResponse
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.stubbing.Scenario.STARTED
 import org.assertj.core.api.Assertions.assertThat
@@ -8,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 
-internal class WireMockExamplesIT {
+internal class WireMockExperimentalExamplesIT {
 
     private val wireMockServer = WireMockServer(0)
 
@@ -28,14 +32,14 @@ internal class WireMockExamplesIT {
 
     @Test
     fun exactUrlOnly() {
-        stubFor(
-            get(urlEqualTo("/some/thing")) {
+        stubFor {
+            ("GET" to "/some/thing") {
                 willReturnAResponse {
                     withHeader("Content-Type", "text/plain")
                     withBody("Hello world!")
                 }
             }
-        )
+        }
 
         assertThat(khttp.get("$host/some/thing").statusCode).isEqualTo(200)
         assertThat(khttp.get("$host/some/thing/else").statusCode).isEqualTo(404)
@@ -43,17 +47,17 @@ internal class WireMockExamplesIT {
 
     @Test
     fun toDoListScenario() {
-        stubFor(
-            get(urlEqualTo("/todo/items")) {
+        stubFor {
+            ("GET" to "/todo/items") {
                 inScenario("To do list") {
                     whenScenarioStateIs(STARTED)
                     willReturnAResponse {
                         withBody("""<items><item>Buy milk</item></items>""")
                     }
                 }
-            },
+            }
 
-            post(urlEqualTo("/todo/items")) {
+            ("POST" to "/todo/items") {
                 inScenario("To do list") {
                     whenScenarioStateIs(STARTED)
                     withRequestBody(containing("Cancel newspaper subscription"))
@@ -62,9 +66,9 @@ internal class WireMockExamplesIT {
                     }
                     willSetStateTo("Cancel newspaper item added")
                 }
-            },
+            }
 
-            get(urlEqualTo("/todo/items")) {
+            ("GET" to "/todo/items") {
                 inScenario("To do list") {
                     whenScenarioStateIs("Cancel newspaper item added")
                     willReturnAResponse {
@@ -72,7 +76,7 @@ internal class WireMockExamplesIT {
                     }
                 }
             }
-        )
+        }
 
         run {
             val response = khttp.get("$host/todo/items")
