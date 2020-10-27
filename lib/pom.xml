@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.github.lucasls.kotlinx.wiremock</groupId>
         <artifactId>wiremock-kotlin-extensions-parent</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>wiremock-kotlin-extensions</artifactId>
