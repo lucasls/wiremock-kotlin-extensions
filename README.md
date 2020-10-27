@@ -9,7 +9,7 @@ WireMock Kotlin Extensions is published to Maven Central a JCenter.
 
 ## Gradle
 ```groovy
-testCompile "com.github.lucasls.kotlinx.wiremock:wiremock-kotlin-extensions:0.10.0"
+testCompile "com.github.lucasls.kotlinx.wiremock:wiremock-kotlin-extensions:0.1.0"
 testCompile "com.github.tomakehurst:wiremock-jre8:2.27.2"
 ```
 
