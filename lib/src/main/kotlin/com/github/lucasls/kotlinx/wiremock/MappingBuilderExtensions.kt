@@ -82,5 +82,5 @@ fun MappingBuilder.withMultipartRequestBody(
 ): MappingBuilder =
     this.withMultipartRequestBody(aMultipart().also(block))
 
-infix fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit): MappingBuilder =
+fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit = {}): MappingBuilder =
     this.willReturn(aResponse(block))

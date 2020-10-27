@@ -5,6 +5,13 @@ import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder
 
 object GlobalVerificationScope {
+    class N {
+        operator fun times(requestPatternBuilder: RequestPatternBuilder) {
+            verify(requestPatternBuilder)
+        }
+    }
+    val n: N = N()
+
     operator fun Int.times(requestPatternBuilder: RequestPatternBuilder) {
         verify(this, requestPatternBuilder)
     }
@@ -15,10 +22,16 @@ object GlobalVerificationScope {
 }
 
 class StubbingVerificationScope(private val stubbing: Stubbing) {
+    class N {
+        operator fun times(requestPatternBuilder: RequestPatternBuilder) {
+            verify(requestPatternBuilder)
+        }
+    }
+    val n: N = N()
+
     operator fun Int.times(requestPatternBuilder: RequestPatternBuilder) {
         stubbing.verify(this, requestPatternBuilder)
     }
-
 }
 
 fun verify(block: GlobalVerificationScope.() -> Unit) {
