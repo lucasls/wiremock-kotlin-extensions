@@ -5,7 +5,14 @@ import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMockBuilder
 import com.github.tomakehurst.wiremock.junit.Stubbing
-import com.github.tomakehurst.wiremock.matching.*
+import com.github.tomakehurst.wiremock.matching.BinaryEqualToPattern
+import com.github.tomakehurst.wiremock.matching.EqualToXmlPattern
+import com.github.tomakehurst.wiremock.matching.MatchesXPathPattern
+import com.github.tomakehurst.wiremock.matching.MultipartValuePatternBuilder
+import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder
+import com.github.tomakehurst.wiremock.matching.StringValuePattern
+import com.github.tomakehurst.wiremock.matching.UrlPathPattern
+import com.github.tomakehurst.wiremock.matching.UrlPattern
 import com.github.tomakehurst.wiremock.recording.RecordSpecBuilder
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 
@@ -16,7 +23,7 @@ fun configureFor(host: String, port: Int) = WireMock.configureFor(host, port)
 fun configureFor(host: String, port: Int, urlPathPrefix: String) = WireMock.configureFor(host, port, urlPathPrefix)
 
 fun configureFor(scheme: String, host: String, port: Int, urlPathPrefix: String) =
-    WireMock.configureFor(host, port, urlPathPrefix)
+    WireMock.configureFor(scheme, host, port, urlPathPrefix)
 
 fun configureFor(scheme: String, host: String, port: Int) = WireMock.configureFor(scheme, host, port)
 
@@ -87,7 +94,8 @@ fun verify(count: Int, requestPatternBuilder: RequestPatternBuilder) =
     WireMock.verify(count, requestPatternBuilder)
 
 fun verify(
-    countMatchingStrategy: CountMatchingStrategy, requestPatternBuilder: RequestPatternBuilder
+    countMatchingStrategy: CountMatchingStrategy,
+    requestPatternBuilder: RequestPatternBuilder
 ) = WireMock.verify(countMatchingStrategy, requestPatternBuilder)
 
 fun Stubbing.verify(vararg requestPatternBuilders: RequestPatternBuilder) = requestPatternBuilders.map {

@@ -4,7 +4,6 @@ import com.github.lucasls.kotlinx.wiremock.urlPathEqualTo
 import com.github.lucasls.kotlinx.wiremock.willReturnAResponse
 import com.github.tomakehurst.wiremock.client.MappingBuilder
 import com.github.tomakehurst.wiremock.client.WireMock
-import com.github.tomakehurst.wiremock.client.WireMock.equalTo
 import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.stubbing.StubMapping
 import com.nhaarman.mockitokotlin2.check
@@ -37,15 +36,17 @@ internal class StubbingDSLKtTest {
         }
 
         // THEN
-        verify(stubFunction).invoke(check { ext ->
-            val orig = WireMock.post("/test/url")
-                .willReturn(
-                    WireMock.aResponse()
-                        .withBody(body)
-                )
+        verify(stubFunction).invoke(
+            check { ext ->
+                val orig = WireMock.post("/test/url")
+                    .willReturn(
+                        WireMock.aResponse()
+                            .withBody(body)
+                    )
 
-            assertThat(ext) hasSameFieldsOf orig
-        })
+                assertThat(ext) hasSameFieldsOf orig
+            }
+        )
     }
 
     @Test
@@ -63,15 +64,17 @@ internal class StubbingDSLKtTest {
         }
 
         // THEN
-        verify(stubFunction).invoke(check { ext ->
-            val orig = WireMock.post(urlPathEqualTo("/test/url"))
-                .willReturn(
-                    WireMock.aResponse()
-                        .withBody(body)
-                )
+        verify(stubFunction).invoke(
+            check { ext ->
+                val orig = WireMock.post(urlPathEqualTo("/test/url"))
+                    .willReturn(
+                        WireMock.aResponse()
+                            .withBody(body)
+                    )
 
-            assertThat(ext) hasSameFieldsOf orig
-        })
+                assertThat(ext) hasSameFieldsOf orig
+            }
+        )
     }
 
     @Test
@@ -90,15 +93,17 @@ internal class StubbingDSLKtTest {
         }
 
         // THEN
-        verify(stubbing).givenThat(check { ext ->
-            val orig = WireMock.post("/test/url")
-                .willReturn(
-                    WireMock.aResponse()
-                        .withBody(body)
-                )
+        verify(stubbing).givenThat(
+            check { ext ->
+                val orig = WireMock.post("/test/url")
+                    .willReturn(
+                        WireMock.aResponse()
+                            .withBody(body)
+                    )
 
-            assertThat(ext) hasSameFieldsOf orig
-        })
+                assertThat(ext) hasSameFieldsOf orig
+            }
+        )
     }
 
     @Test
@@ -147,12 +152,14 @@ internal class StubbingDSLKtTest {
         }
 
         // THEN
-        verify(stubbing).stubFor(check { ext ->
-            val orig = WireMock.post("/test/url")
-                .willReturn(WireMock.aResponse().withBody(body))
+        verify(stubbing).stubFor(
+            check { ext ->
+                val orig = WireMock.post("/test/url")
+                    .willReturn(WireMock.aResponse().withBody(body))
 
-            assertThat(ext) hasSameFieldsOf orig
-        })
+                assertThat(ext) hasSameFieldsOf orig
+            }
+        )
     }
 
     @Test

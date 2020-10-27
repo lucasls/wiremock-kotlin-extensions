@@ -33,29 +33,51 @@ internal class RequestPatternBuilderExtensionsKtTest {
         }
 
         return listOf<Triple<String, () -> RequestPatternBuilder, () -> RequestPatternBuilder>>(
-            Triple("getRequestedFor",
-                { WireMock.getRequestedFor(urlPattern) }, { getRequestedFor(urlPattern, block) }),
-            Triple("postRequestedFor",
-                { WireMock.postRequestedFor(urlPattern) }, { postRequestedFor(urlPattern, block) }),
-            Triple("putRequestedFor",
-                { WireMock.putRequestedFor(urlPattern) }, { putRequestedFor(urlPattern, block) }),
-            Triple("deleteRequestedFor",
-                { WireMock.deleteRequestedFor(urlPattern) }, { deleteRequestedFor(urlPattern, block) }),
-            Triple("patchRequestedFor",
-                { WireMock.patchRequestedFor(urlPattern) }, { patchRequestedFor(urlPattern, block) }),
-            Triple("headRequestedFor",
-                { WireMock.headRequestedFor(urlPattern) }, { headRequestedFor(urlPattern, block) }),
-            Triple("optionsRequestedFor",
-                { WireMock.optionsRequestedFor(urlPattern) }, { optionsRequestedFor(urlPattern, block) }),
-            Triple("traceRequestedFor",
-                { WireMock.traceRequestedFor(urlPattern) }, { traceRequestedFor(urlPattern, block) }),
-            Triple("anyRequestedFor",
-                { WireMock.anyRequestedFor(urlPattern) }, { anyRequestedFor(urlPattern, block) }),
-            Triple("requestMadeFor",
+            Triple(
+                "getRequestedFor",
+                { WireMock.getRequestedFor(urlPattern) }, { getRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "postRequestedFor",
+                { WireMock.postRequestedFor(urlPattern) }, { postRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "putRequestedFor",
+                { WireMock.putRequestedFor(urlPattern) }, { putRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "deleteRequestedFor",
+                { WireMock.deleteRequestedFor(urlPattern) }, { deleteRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "patchRequestedFor",
+                { WireMock.patchRequestedFor(urlPattern) }, { patchRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "headRequestedFor",
+                { WireMock.headRequestedFor(urlPattern) }, { headRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "optionsRequestedFor",
+                { WireMock.optionsRequestedFor(urlPattern) }, { optionsRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "traceRequestedFor",
+                { WireMock.traceRequestedFor(urlPattern) }, { traceRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "anyRequestedFor",
+                { WireMock.anyRequestedFor(urlPattern) }, { anyRequestedFor(urlPattern, block) }
+            ),
+            Triple(
+                "requestMadeFor",
                 { WireMock.requestMadeFor(reqMatcher, parameters) },
-                { requestMadeFor(reqMatcher, parameters, block) }),
-            Triple("requestMadeFor",
-                { WireMock.requestMadeFor(reqMatcherExt) }, { requestMadeFor(reqMatcherExt, block) })
+                { requestMadeFor(reqMatcher, parameters, block) }
+            ),
+            Triple(
+                "requestMadeFor",
+                { WireMock.requestMadeFor(reqMatcherExt) }, { requestMadeFor(reqMatcherExt, block) }
+            )
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {
@@ -78,29 +100,51 @@ internal class RequestPatternBuilderExtensionsKtTest {
         val reqMatcherExt = RequestMatcherExtension.ALWAYS
 
         return listOf<Triple<String, () -> RequestPatternBuilder, () -> RequestPatternBuilder>>(
-            Triple("getRequestedFor",
-                { WireMock.getRequestedFor(urlPattern) }, { getRequestedFor(urlPattern) }),
-            Triple("postRequestedFor",
-                { WireMock.postRequestedFor(urlPattern) }, { postRequestedFor(urlPattern) }),
-            Triple("putRequestedFor",
-                { WireMock.putRequestedFor(urlPattern) }, { putRequestedFor(urlPattern) }),
-            Triple("deleteRequestedFor",
-                { WireMock.deleteRequestedFor(urlPattern) }, { deleteRequestedFor(urlPattern) }),
-            Triple("patchRequestedFor",
-                { WireMock.patchRequestedFor(urlPattern) }, { patchRequestedFor(urlPattern) }),
-            Triple("headRequestedFor",
-                { WireMock.headRequestedFor(urlPattern) }, { headRequestedFor(urlPattern) }),
-            Triple("optionsRequestedFor",
-                { WireMock.optionsRequestedFor(urlPattern) }, { optionsRequestedFor(urlPattern) }),
-            Triple("traceRequestedFor",
-                { WireMock.traceRequestedFor(urlPattern) }, { traceRequestedFor(urlPattern) }),
-            Triple("anyRequestedFor",
-                { WireMock.anyRequestedFor(urlPattern) }, { anyRequestedFor(urlPattern) }),
-            Triple("requestMadeFor",
+            Triple(
+                "getRequestedFor",
+                { WireMock.getRequestedFor(urlPattern) }, { getRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "postRequestedFor",
+                { WireMock.postRequestedFor(urlPattern) }, { postRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "putRequestedFor",
+                { WireMock.putRequestedFor(urlPattern) }, { putRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "deleteRequestedFor",
+                { WireMock.deleteRequestedFor(urlPattern) }, { deleteRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "patchRequestedFor",
+                { WireMock.patchRequestedFor(urlPattern) }, { patchRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "headRequestedFor",
+                { WireMock.headRequestedFor(urlPattern) }, { headRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "optionsRequestedFor",
+                { WireMock.optionsRequestedFor(urlPattern) }, { optionsRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "traceRequestedFor",
+                { WireMock.traceRequestedFor(urlPattern) }, { traceRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "anyRequestedFor",
+                { WireMock.anyRequestedFor(urlPattern) }, { anyRequestedFor(urlPattern) }
+            ),
+            Triple(
+                "requestMadeFor",
                 { WireMock.requestMadeFor(reqMatcher, parameters) },
-                { requestMadeFor(reqMatcher, parameters) }),
-            Triple("requestMadeFor",
-                { WireMock.requestMadeFor(reqMatcherExt) }, { requestMadeFor(reqMatcherExt) })
+                { requestMadeFor(reqMatcher, parameters) }
+            ),
+            Triple(
+                "requestMadeFor",
+                { WireMock.requestMadeFor(reqMatcherExt) }, { requestMadeFor(reqMatcherExt) }
+            )
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {
@@ -113,7 +157,6 @@ internal class RequestPatternBuilderExtensionsKtTest {
             }
         }
     }
-
 
     @Test
     fun `withAnyRequestBodyPart should call original and apply block`() {
@@ -139,7 +182,6 @@ internal class RequestPatternBuilderExtensionsKtTest {
 
         Assertions.assertThat(ext) hasSameFieldsOf orig
     }
-
 
     @Test
     fun `withAllRequestBodyParts should call original and apply block`() {

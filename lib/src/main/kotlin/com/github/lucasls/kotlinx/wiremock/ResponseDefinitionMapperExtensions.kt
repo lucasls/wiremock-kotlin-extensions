@@ -13,7 +13,9 @@ fun ok(body: String, block: ResponseDefinitionBuilder.() -> Unit = {}): Response
     WireMock.ok(body).also(block)
 
 fun okForContentType(
-    contentType: String, body: String, block: ResponseDefinitionBuilder.() -> Unit = {}
+    contentType: String,
+    body: String,
+    block: ResponseDefinitionBuilder.() -> Unit = {}
 ): ResponseDefinitionBuilder =
     WireMock.okForContentType(contentType, body).also(block)
 
@@ -33,17 +35,20 @@ fun noContent(block: ResponseDefinitionBuilder.() -> Unit = {}): ResponseDefinit
     WireMock.noContent().also(block)
 
 fun permanentRedirect(
-    location: String, block: ResponseDefinitionBuilder.() -> Unit = {}
+    location: String,
+    block: ResponseDefinitionBuilder.() -> Unit = {}
 ): ResponseDefinitionBuilder =
     WireMock.permanentRedirect(location).also(block)
 
 fun temporaryRedirect(
-    location: String, block: ResponseDefinitionBuilder.() -> Unit = {}
+    location: String,
+    block: ResponseDefinitionBuilder.() -> Unit = {}
 ): ResponseDefinitionBuilder =
     WireMock.temporaryRedirect(location).also(block)
 
 fun seeOther(
-    location: String, block: ResponseDefinitionBuilder.() -> Unit = {}
+    location: String,
+    block: ResponseDefinitionBuilder.() -> Unit = {}
 ): ResponseDefinitionBuilder =
     WireMock.seeOther(location).also(block)
 

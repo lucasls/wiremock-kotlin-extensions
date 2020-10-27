@@ -28,17 +28,23 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("aResponse", { WireMock.aResponse() }, { aResponse(block) }),
             Triple("ok", { WireMock.ok() }, { ok(block) }),
             Triple("ok", { WireMock.ok(body) }, { ok(body, block) }),
-            Triple("okForContentType", { WireMock.okForContentType(contentType, body) },
-                { okForContentType(contentType, body, block) }),
+            Triple(
+                "okForContentType", { WireMock.okForContentType(contentType, body) },
+                { okForContentType(contentType, body, block) }
+            ),
             Triple("okJson", { WireMock.okJson(body) }, { okJson(body, block) }),
             Triple("okXml", { WireMock.okXml(body) }, { okXml(body, block) }),
             Triple("okTextXml", { WireMock.okTextXml(body) }, { okTextXml(body, block) }),
             Triple("created", { WireMock.created() }, { created(block) }),
             Triple("noContent", { WireMock.noContent() }, { noContent(block) }),
-            Triple("permanentRedirect", { WireMock.permanentRedirect(location) },
-                { permanentRedirect(location, block) }),
-            Triple("temporaryRedirect", { WireMock.temporaryRedirect(location) },
-                { temporaryRedirect(location, block) }),
+            Triple(
+                "permanentRedirect", { WireMock.permanentRedirect(location) },
+                { permanentRedirect(location, block) }
+            ),
+            Triple(
+                "temporaryRedirect", { WireMock.temporaryRedirect(location) },
+                { temporaryRedirect(location, block) }
+            ),
             Triple("seeOther", { WireMock.seeOther(location) }, { seeOther(location, block) }),
             Triple("badRequest", { WireMock.badRequest() }, { badRequest(block) }),
             Triple("badRequestEntity", { WireMock.badRequestEntity() }, { badRequestEntity(block) }),
@@ -47,12 +53,15 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("notFound", { WireMock.notFound() }, { notFound(block) }),
             Triple("serverError", { WireMock.serverError() }, { serverError(block) }),
             Triple("serviceUnavailable", { WireMock.serviceUnavailable() }, { serviceUnavailable(block) }),
-            Triple("status", { WireMock.status(status) }, {
-                status(
-                    status,
-                    block
-                )
-            })
+            Triple(
+                "status", { WireMock.status(status) },
+                {
+                    status(
+                        status,
+                        block
+                    )
+                }
+            )
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {
@@ -78,17 +87,23 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("aResponse", { WireMock.aResponse() }, { aResponse() }),
             Triple("ok", { WireMock.ok() }, { ok() }),
             Triple("ok", { WireMock.ok(body) }, { ok(body) }),
-            Triple("okForContentType", { WireMock.okForContentType(contentType, body) },
-                { okForContentType(contentType, body) }),
+            Triple(
+                "okForContentType", { WireMock.okForContentType(contentType, body) },
+                { okForContentType(contentType, body) }
+            ),
             Triple("okJson", { WireMock.okJson(body) }, { okJson(body) }),
             Triple("okXml", { WireMock.okXml(body) }, { okXml(body) }),
             Triple("okTextXml", { WireMock.okTextXml(body) }, { okTextXml(body) }),
             Triple("created", { WireMock.created() }, { created() }),
             Triple("noContent", { WireMock.noContent() }, { noContent() }),
-            Triple("permanentRedirect", { WireMock.permanentRedirect(location) },
-                { permanentRedirect(location) }),
-            Triple("temporaryRedirect", { WireMock.temporaryRedirect(location) },
-                { temporaryRedirect(location) }),
+            Triple(
+                "permanentRedirect", { WireMock.permanentRedirect(location) },
+                { permanentRedirect(location) }
+            ),
+            Triple(
+                "temporaryRedirect", { WireMock.temporaryRedirect(location) },
+                { temporaryRedirect(location) }
+            ),
             Triple("seeOther", { WireMock.seeOther(location) }, { seeOther(location) }),
             Triple("badRequest", { WireMock.badRequest() }, { badRequest() }),
             Triple("badRequestEntity", { WireMock.badRequestEntity() }, { badRequestEntity() }),
@@ -97,11 +112,14 @@ internal class ResponseDefinitionMapperExtensionsKtTest {
             Triple("notFound", { WireMock.notFound() }, { notFound() }),
             Triple("serverError", { WireMock.serverError() }, { serverError() }),
             Triple("serviceUnavailable", { WireMock.serviceUnavailable() }, { serviceUnavailable() }),
-            Triple("status", { WireMock.status(status) }, {
-                status(
-                    status
-                )
-            })
+            Triple(
+                "status", { WireMock.status(status) },
+                {
+                    status(
+                        status
+                    )
+                }
+            )
 
         ).map { (name, originalFactory, extensionFactory) ->
             DynamicTest.dynamicTest(name) {
