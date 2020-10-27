@@ -55,12 +55,15 @@ fun requestMatching(customRequestMatcherName: String, block: MappingBuilder.() -
     WireMock.requestMatching(customRequestMatcherName).also(block)
 
 fun requestMatching(
-    customRequestMatcherName: String, parameters: Parameters, block: MappingBuilder.() -> Unit = {}
+    customRequestMatcherName: String,
+    parameters: Parameters,
+    block: MappingBuilder.() -> Unit = {}
 ): MappingBuilder =
     WireMock.requestMatching(customRequestMatcherName, parameters).also(block)
 
 fun requestMatching(
-    requestMatcher: ValueMatcher<Request>, block: MappingBuilder.() -> Unit = {}
+    requestMatcher: ValueMatcher<Request>,
+    block: MappingBuilder.() -> Unit = {}
 ): MappingBuilder =
     WireMock.requestMatching(requestMatcher).also(block)
 
@@ -73,7 +76,8 @@ fun delete(url: String, block: MappingBuilder.() -> Unit = {}): MappingBuilder =
 // Extensions
 
 fun MappingBuilder.inScenario(
-    scenarioName: String, block: ScenarioMappingBuilder.() -> Unit
+    scenarioName: String,
+    block: ScenarioMappingBuilder.() -> Unit
 ): ScenarioMappingBuilder =
     this.inScenario(scenarioName).also(block)
 
@@ -82,5 +86,5 @@ fun MappingBuilder.withMultipartRequestBody(
 ): MappingBuilder =
     this.withMultipartRequestBody(aMultipart().also(block))
 
-infix fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit): MappingBuilder =
+fun MappingBuilder.willReturnAResponse(block: ResponseDefinitionBuilder.() -> Unit = {}): MappingBuilder =
     this.willReturn(aResponse(block))

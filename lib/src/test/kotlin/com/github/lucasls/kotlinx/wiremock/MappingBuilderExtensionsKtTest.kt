@@ -55,12 +55,18 @@ internal class MappingBuilderExtensionsKtTest {
             Triple("proxyAllTo", { WireMock.proxyAllTo(url) }, { proxyAllTo(url, block) }),
 
             Triple("request", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern, block) }),
-            Triple("requestMatching", { WireMock.requestMatching(reqMatcher) },
-                { requestMatching(reqMatcher, block) }),
-            Triple("requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
-                { requestMatching(reqMatcher, parameters, block) }),
-            Triple("requestMatching", { WireMock.requestMatching(reqMatcherExt) },
-                { requestMatching(reqMatcherExt, block) })
+            Triple(
+                "requestMatching", { WireMock.requestMatching(reqMatcher) },
+                { requestMatching(reqMatcher, block) }
+            ),
+            Triple(
+                "requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
+                { requestMatching(reqMatcher, parameters, block) }
+            ),
+            Triple(
+                "requestMatching", { WireMock.requestMatching(reqMatcherExt) },
+                { requestMatching(reqMatcherExt, block) }
+            )
 
         ).map { (name, originalFactory, extensionFactory) ->
             dynamicTest(name) {
@@ -103,8 +109,10 @@ internal class MappingBuilderExtensionsKtTest {
             Triple("request", { WireMock.request("GET", urlPattern) }, { request("GET", urlPattern) }),
 
             Triple("requestMatching", { WireMock.requestMatching(reqMatcher) }, { requestMatching(reqMatcher) }),
-            Triple("requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
-                { requestMatching(reqMatcher, parameters) }),
+            Triple(
+                "requestMatching", { WireMock.requestMatching(reqMatcher, parameters) },
+                { requestMatching(reqMatcher, parameters) }
+            ),
             Triple("requestMatching", { WireMock.requestMatching(reqMatcherExt) }, { requestMatching(reqMatcherExt) })
 
         ).map { (name, originalFactory, extensionFactory) ->

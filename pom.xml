@@ -150,6 +150,12 @@
             <artifactId>khttp</artifactId>
             <version>1.0.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jetbrains.spek</groupId>
+                    <artifactId>spek-junit-platform-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

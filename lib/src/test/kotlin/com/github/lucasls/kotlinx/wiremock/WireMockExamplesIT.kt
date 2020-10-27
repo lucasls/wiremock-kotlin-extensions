@@ -1,18 +1,13 @@
 package com.github.lucasls.kotlinx.wiremock
 
-import com.github.lucasls.kotlinx.wiremock.experimental.stubFor
 import com.github.tomakehurst.wiremock.WireMockServer
-import com.github.tomakehurst.wiremock.client.WireMock.configureFor
-import com.github.tomakehurst.wiremock.client.WireMock.containing
-import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
 import com.github.tomakehurst.wiremock.stubbing.Scenario.STARTED
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-
-internal class WireMockKotlinExtensionsIT {
+internal class WireMockExamplesIT {
 
     private val wireMockServer = WireMockServer(0)
 
@@ -32,14 +27,14 @@ internal class WireMockKotlinExtensionsIT {
 
     @Test
     fun exactUrlOnly() {
-        stubFor {
-            ("GET" to "/some/thing") {
+        stubFor(
+            get(urlEqualTo("/some/thing")) {
                 willReturnAResponse {
                     withHeader("Content-Type", "text/plain")
                     withBody("Hello world!")
                 }
             }
-        }
+        )
 
         assertThat(khttp.get("$host/some/thing").statusCode).isEqualTo(200)
         assertThat(khttp.get("$host/some/thing/else").statusCode).isEqualTo(404)

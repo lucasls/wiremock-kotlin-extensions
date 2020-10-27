@@ -1,16 +1,13 @@
 package com.github.lucasls.kotlinx.wiremock.experimental
 
-import com.github.tomakehurst.wiremock.client.MappingBuilder
-import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder
-import com.github.tomakehurst.wiremock.junit.Stubbing
-import com.github.tomakehurst.wiremock.stubbing.StubMapping
-import com.github.lucasls.kotlinx.wiremock.aResponse
 import com.github.lucasls.kotlinx.wiremock.givenThat
 import com.github.lucasls.kotlinx.wiremock.request
 import com.github.lucasls.kotlinx.wiremock.stubFor
 import com.github.lucasls.kotlinx.wiremock.urlEqualTo
+import com.github.tomakehurst.wiremock.client.MappingBuilder
+import com.github.tomakehurst.wiremock.junit.Stubbing
 import com.github.tomakehurst.wiremock.matching.UrlPattern
-
+import com.github.tomakehurst.wiremock.stubbing.StubMapping
 
 class StubbingScope(private val stubFunction: (MappingBuilder) -> StubMapping) {
 
@@ -22,7 +19,6 @@ class StubbingScope(private val stubFunction: (MappingBuilder) -> StubMapping) {
 
     infix fun String.to(url: String) = MappingBuilderScope(request(this, urlEqualTo(url)))
     infix fun String.to(urlPattern: UrlPattern) = MappingBuilderScope(request(this, urlPattern))
-
 }
 
 fun givenThat(block: StubbingScope.() -> Unit) {
