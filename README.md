@@ -1,4 +1,5 @@
-[ ![Download](https://api.bintray.com/packages/lucasls/oss/wiremock-kotlin-extensions/images/download.svg) ](https://bintray.com/lucasls/oss/wiremock-kotlin-extensions/_latestVersion)
+[ ![JCenter](https://api.bintray.com/packages/lucasls/oss/wiremock-kotlin-extensions/images/download.svg) ](https://bintray.com/lucasls/oss/wiremock-kotlin-extensions/_latestVersion)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.lucasls.kotlinx.wiremock/wiremock-kotlin-extensions/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.lucasls.kotlinx.wiremock/wiremock-kotlin-extensions)
 
 # WireMock Kotlin Extensions
 [WireMock](http://wiremock.org/) is awesome, using Java DSLs on Kotlin not that much. This lib aims to help with that. Making use of Kotlin's powerful Extension Functions, this lib enhances WireMock API without losing any existing functionality.
@@ -9,7 +10,7 @@ WireMock Kotlin Extensions is published to Maven Central a JCenter.
 
 ## Gradle
 ```groovy
-testCompile "com.github.lucasls.kotlinx.wiremock:wiremock-kotlin-extensions:0.1.0"
+testCompile "com.github.lucasls.kotlinx.wiremock:wiremock-kotlin-extensions:0.1.2"
 testCompile "com.github.tomakehurst:wiremock-jre8:2.27.2"
 ```
 
