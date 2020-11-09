@@ -6,7 +6,7 @@
 
 # Getting Started
 
-WireMock Kotlin Extensions is published to Maven Central a JCenter.
+WireMock Kotlin Extensions is published to Maven Central and JCenter.
 
 ## Gradle
 ```groovy
