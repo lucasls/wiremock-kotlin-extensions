@@ -47,7 +47,7 @@
     </distributionManagement>
 
     <properties>
-        <kotlin.version>1.3.72</kotlin.version>
+        <kotlin.version>1.6.0</kotlin.version>
         <kotlin.compiler.jvmTarget>1.6</kotlin.compiler.jvmTarget>
         <surefire.version>2.22.2</surefire.version>
         <junit-jupiter.version>5.6.2</junit-jupiter.version>
